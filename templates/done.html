@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+  <h2>Thanks for contacting us!</h2>
+  
+  {% for form in form_data %}
+      {{ form|pprint }}
+
+  {% endfor %}
+  
+{% endblock %}

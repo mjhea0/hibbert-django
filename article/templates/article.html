@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static}
+
+{% block sidebar %}
+<li><a href="/articles/all">Articles</a></li>
+<li><a href="/contact">Contact</a></li>
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ article.title }}</h1>
+<p>{{ article.body }}</p>
+{% if article.thumbnail %}
+<p><img src="{% get_static_prefix %}{{ article.get_thumbnail}}" width="200"/></p>
+{% endif %}
+<p>{{article.likes}} people liked this article</a></p>
+<p><a href="/articles/like/{{article.id}}">Like</a></p>
+
+<h2>Comments</h2>
+{% for c in article.comment_set.all %}
+<p>{{c.name}}: {{c.body}}</p>
+{% endfor %}
+
+<p><a href="/articles/add_comment/{{article.id}}">Add Comment</a></p>
+
+{% endblock %}
