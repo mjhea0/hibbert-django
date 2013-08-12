@@ -5,6 +5,7 @@ import dj_database_url
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(PROJECT_ROOT)
+ALLOWED_HOSTS = ['localhost']
 
 PROJECT_DIRECTORY = os.getcwd()
 
@@ -212,13 +213,13 @@ except Exception as e:
 
 
 
-if not DEBUG:    
-    # AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-    # AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    # AWS_PRELOAD_METADATA = True
-    # STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    # S3_URL = 'http://%s.s3.amazonaws.com/assets/' % AWS_STORAGE_BUCKET_NAME
-    # STATIC_URL = S3_URL
+if not DEBUG:  
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_PRELOAD_METADATA = True  
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    S3_URL = 'http://%s.s3.amazonaws.com/assets/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = S3_URL
 
