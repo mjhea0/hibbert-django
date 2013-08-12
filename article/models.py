@@ -22,7 +22,7 @@ class Article(models.Model):
 
 	def get_thumbnail(self):
 		thumb = str(self.thumbnail)
-		if not setting.DEBUG:
+		if not settings.DEBUG:
 			thumb = thumb.replace('assets/', '')
 			
 		return thumb
