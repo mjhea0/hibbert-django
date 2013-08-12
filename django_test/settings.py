@@ -11,7 +11,7 @@ PROJECT_DIRECTORY = os.getcwd()
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['djanngo-hibbert.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['djanngo-hibbert.herokuapp.com']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -199,4 +199,5 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
     STATIC_URL = S3_URL
+    ALLOWED_HOSTS = ['djanngo-hibbert.herokuapp.com', '127.0.0.1']
 
