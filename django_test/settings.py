@@ -8,7 +8,7 @@ SITE_ROOT = os.path.dirname(PROJECT_ROOT)
 
 PROJECT_DIRECTORY = os.getcwd()
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
