@@ -9,7 +9,7 @@ SITE_ROOT = os.path.dirname(PROJECT_ROOT)
 
 PROJECT_DIRECTORY = os.getcwd()
 
-DEBUG = TRUE
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['127.0.0.1']
 
