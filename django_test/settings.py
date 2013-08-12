@@ -63,14 +63,14 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = (os.path.join(PROJECT_DIRECTORY, 'static'),)
+STATIC_ROOT = (os.path.join(PROJECT_DIRECTORY, 'static/'),)
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-STATICFILES_DIRS = ('assets',os.path.join(PROJECT_DIRECTORY, 'static'),)
+STATICFILES_DIRS = ('assets',os.path.join(PROJECT_DIRECTORY, 'static/'),)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -136,18 +136,36 @@ INSTALLED_APPS = (
 # loggers: list of different instances of a log (email, html output)
 
 
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#         'require_debug_false': {
+#             '()': 'django.utils.log.RequireDebugFalse'
+#         }
+#     },
+#     'handlers': {
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     }
+# }
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
@@ -160,47 +178,6 @@ LOGGING = {
     }
 }
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': True,
-#     'formatters': {
-#         'standard': {
-#             'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
-#         },
-#     },
-#     'handlers': {
-#         'default': {
-#             'level':'DEBUG',
-#             'class':'logging.handlers.RotatingFileHandler',
-#             'filename': 'logs/mylog.log',
-#             'maxBytes': 1024*1024*5, # 5 MB
-#             'backupCount': 5,
-#             'formatter':'standard', # uses standard formatter, defined above
-#         },  
-#         'request_handler': {
-#                 'level':'DEBUG',
-#                 'class':'logging.handlers.RotatingFileHandler',
-#                 'filename': 'logs/django_request.log',
-#                 'maxBytes': 1024*1024*5, # 5 MB
-#                 'backupCount': 5,
-#                 'formatter':'standard', # uses standard formatter, defined above
-#         },
-#     },
-#     'loggers': {
-
-#         '': {
-#             'handlers': ['default'],
-#             'level': 'DEBUG', # change level for different verbosity
-#             'propagate': True
-#         },
-#         'django.request': {
-#             'handlers': ['request_handler'],
-#             'level': 'DEBUG', # change level for different verbosity
-#             'propagate': False
-#         },
-#     }
-# }
-
 AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
 
 UPLOAD_FILE_PATTERN = 'assets/uploaded_files/%s_%s'
@@ -212,11 +189,12 @@ try:
 except Exception as e:
     print e.message
 
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_PRELOAD_METADATA = True
 
 if not DEBUG:
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
