@@ -5,7 +5,7 @@ import dj_database_url
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(PROJECT_ROOT)
-ALLOWED_HOSTS = ['localhost']
+#ALLOWED_HOSTS = ['localhost']
 
 PROJECT_DIRECTORY = os.getcwd()
 
