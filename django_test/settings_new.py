@@ -1,17 +1,19 @@
+#---- settings.py USED FOR DEPLOYING on Heroku and S3 ----#
+
 import os
 
-# Added to help use env variables
-def env_var(key, default=None):
-    """Retrieves env vars and makes Python boolean replacements"""
-    val = os.environ.get(key, default)
-    if val == 'True':
-        val = True
-    elif val == 'False':
-        val = False
-    return val
+# # Added to help use env variables
+# def env_var(key, default=None):
+#     """Retrieves env vars and makes Python boolean replacements"""
+#     val = os.environ.get(key, default)
+#     if val == 'True':
+#         val = True
+#     elif val == 'False':
+#         val = False
+#     return val
 
-# Django settings for djangoproject project.
-DEBUG = env_var('DJ_DEBUG', False) #Unless env var is set to True, debug is off
+
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -21,15 +23,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+    'default': dj_database_url.config()
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
