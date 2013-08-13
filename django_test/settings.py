@@ -180,10 +180,10 @@ UPLOAD_FILE_PATTERN = 'assets/uploaded_files/%s_%s'
 
 SOUTH_DATABASE_ADAPTERS = {'default':'south.db.postgresql_psycopg2'}
 
-try: 
-    from local_settings import *
-except Exception as e:
-    print e.message
+# try: 
+#     from local_settings import *
+# except Exception as e:
+#     print e.message
 
 if not DEBUG:
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
