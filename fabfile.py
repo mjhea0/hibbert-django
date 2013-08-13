@@ -1,15 +1,15 @@
 from fabric.api import local
 
 
-def backup():
-	local('git pull heroku master')
-	local('git add .')
-
-	print("enter your commit comment: ")
-	comment = raw_input()
-	local("git commit -m '%s'" % comment)
-	
-	local('git push')
+# def backup():
+    # local('git pull')
+    # local('git add .')
+    
+    # print("enter your commit comment:")
+    # comment = raw_input()
+    # local('git commit -m "%s"' % comment)
+    
+    # local('git push')
 
 # trick s3 in order to deploy
 def switch_debug(what_to_change, change_to):
@@ -22,7 +22,7 @@ def switch_debug(what_to_change, change_to):
 
 def deploy():
 	#local('pip freeze > requirements.txt')
-    local('git pull')
+    # local('git pull')
     local('git add .')
     
     print("enter your commit comment: ")
