@@ -6,7 +6,7 @@ import dj_database_url
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(PROJECT_ROOT)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['hibbert-django.herokuapp.com', '127.0.0.1']
 
@@ -19,6 +19,14 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': dj_database_url.config()
 }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # leave name, user, password, host, and port blank - heroku will manage these
+     }
+}
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
