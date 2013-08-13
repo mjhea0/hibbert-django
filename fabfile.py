@@ -29,14 +29,14 @@ def deploy():
     comment = raw_input()
     local("git commit -m '%s'" % comment)
     
-    local('git push') 
+    # local('git push') 
     
     
-    switch_debug('True', 'False')
+    # switch_debug('True', 'False')
     
-    local('python manage.py collectstatic')
+    # local('python manage.py collectstatic')
     
-    switch_debug('False', 'True')
+    # switch_debug('False', 'True')
     
     # brings down server for a few seconds
     local('heroku maintenance:on')
