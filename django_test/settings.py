@@ -1,7 +1,6 @@
 #---- USED FOR DEPLOYING ----#
 
 import os
-import dj_database_url
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(PROJECT_ROOT)
@@ -15,18 +14,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': dj_database_url.config()
-}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # leave name, user, password, host, and port blank - heroku will manage these
-     }
-}
-
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -186,21 +173,39 @@ AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
 
 UPLOAD_FILE_PATTERN = 'assets/uploaded_files/%s_%s'
 
-SOUTH_DATABASE_ADAPTERS = {'default':'south.db.postgresql_psycopg2'}
+
+
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+
+DATABASES = { 'default' : dj_database_url.config(
+    default='sqlite:////%s/storage.db' % SITE_ROOT)
+}
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 try: 
     from local_settings import *
 except Exception as e:
     print e.message
 
-# if not DEBUG:
-AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_PRELOAD_METADATA = True
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-STATIC_URL = S3_URL
-ALLOWED_HOSTS = ['djanngo-hibbert.herokuapp.com', '127.0.0.1']
+if not DEBUG:
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_PRELOAD_METADATA = True
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = S3_URL
+    
+if not DEBUG:
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = S3_URL
 
