@@ -42,6 +42,6 @@ def deploy():
     local('heroku maintenance:on')
     
     local('git push heroku')
-    local('heroku run python manage.py migrate')
+    #local('heroku run python manage.py migrate')
     
     local('heroku maintenance:off')
