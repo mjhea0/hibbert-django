@@ -1,2 +1,2 @@
-my eyes [only](hibbert-django.herokuapps.com)
+my eyes [only](http://hibbert-django.herokuapp.com)
 
